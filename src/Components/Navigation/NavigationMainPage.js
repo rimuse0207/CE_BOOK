@@ -1,6 +1,8 @@
 import React from 'react';
 import Tree from 'react-animated-tree-v2';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { NaviSelectCheckRedux } from '../../Models/NaviSelectRedux/NaviSelectRedux';
 
 const NavigationMainPageContainer = styled.div`
     width: 80%;
@@ -18,6 +20,16 @@ const typeStyles = {
 };
 
 const NavigationMainPage = () => {
+    const dispatch = useDispatch();
+
+    const handleCllicksNaviMenu = clickMenu => {
+        try {
+            dispatch(NaviSelectCheckRedux(clickMenu));
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <nav>
             <h2 style={{ marginLeft: '40px' }}>메뉴</h2>
@@ -27,9 +39,9 @@ const NavigationMainPage = () => {
                     // type="Fruit"
                     open
                     visible
-                    onClick={() => console.log('qweqwe')}
-                    itemId={'apple'}
-                    onItemClick={itemId => console.log(itemId)}
+                    onClick={() => handleCllicksNaviMenu('공용')}
+                    itemId={'공용'}
+                    onItemClick={itemId => handleCllicksNaviMenu(itemId)}
                     style={treeStyles}
                 >
                     <Tree content="1.CE Work Flow"></Tree>
@@ -44,9 +56,9 @@ const NavigationMainPage = () => {
                     // type="Fruit"
                     open
                     visible
-                    onClick={() => console.log('qweqwe')}
-                    itemId={'apple'}
-                    onItemClick={itemId => console.log(itemId)}
+                    onClick={() => handleCllicksNaviMenu('Grinder')}
+                    itemId={'Grinder'}
+                    onItemClick={itemId => handleCllicksNaviMenu(itemId)}
                     style={treeStyles}
                 >
                     <Tree content="1.기초자료"></Tree>
@@ -65,9 +77,9 @@ const NavigationMainPage = () => {
                     // type="Fruit"
                     open
                     visible
-                    onClick={() => console.log('qweqwe')}
-                    itemId={'apple'}
-                    onItemClick={itemId => console.log(itemId)}
+                    onClick={() => handleCllicksNaviMenu('Dicer')}
+                    itemId={'Dicer'}
+                    onItemClick={itemId => handleCllicksNaviMenu(itemId)}
                     style={treeStyles}
                 >
                     <Tree content="1.기초자료">
@@ -96,9 +108,9 @@ const NavigationMainPage = () => {
                     // type="Fruit"
                     open
                     visible
-                    onClick={() => console.log('qweqwe')}
-                    itemId={'apple'}
-                    onItemClick={itemId => console.log(itemId)}
+                    onClick={() => handleCllicksNaviMenu('Laser')}
+                    itemId={'Laser'}
+                    onItemClick={itemId => handleCllicksNaviMenu(itemId)}
                     style={treeStyles}
                 >
                     <Tree content="Contents">
