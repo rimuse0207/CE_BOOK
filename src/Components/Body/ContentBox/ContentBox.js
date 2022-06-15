@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ContentList from './ContentList/ContentList';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { InfoGet } from '../../../Api/ContentAPI/ContentAPI';
+import { ClicksNextFileData } from '../../../Models/NaviSelectRedux/NaviSelectRedux';
+import LoaderMainPage from '../../Loader/LoaderMainPage';
 
 const ContentBoxMainDivBox = styled.div`
     min-height: 70vh;
@@ -37,15 +39,31 @@ const ContentBoxMainDivBox = styled.div`
             font-weight: bolder;
         }
     }
+    .ContentBox_NextContentShowButton {
+        button {
+            border: 1px solid black;
+            text-align: center;
+            width: 300px;
+            height: 40px;
+            border-radius: 30px;
+            font-size: 1.3em;
+            font-weight: bolder;
+            :hover {
+                cursor: pointer;
+            }
+        }
+        width: 300px;
+        margin: 0 auto;
+        margin-top: 50px;
+    }
 `;
 
 const ContentBox = () => {
     const NaviClicksData = useSelector(state => state.NaviSelectCheck.NaviClickTitle);
-    const [PDFData, setPDFData] = useState([
-        { pdfName: 'Britymail.pdf', ShowCount: 280 },
-        { pdfName: 'PrecisionProcessingTools.pdf', ShowCount: 140 },
-        { pdfName: 'TNL2022.pdf', ShowCount: 1300 },
-    ]);
+    const Pagenumbering = useSelector(state => state.NaviSelectCheck.Pagenumber);
+    const dispatch = useDispatch();
+    const [PDFData, setPDFData] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (NaviClicksData) {
@@ -56,7 +74,10 @@ const ContentBox = () => {
     const GetPDFFileData = async () => {
         try {
             const getPDFFileDatas = await InfoGet(`${process.env.REACT_APP_API_URL}/CeBook_app_server/navi_data`, NaviClicksData, 0);
-            console.log(getPDFFileDatas);
+            if (getPDFFileDatas.data.dataSuccess) {
+                setPDFData(getPDFFileDatas.data.root_public);
+            } else {
+            }
         } catch (error) {
             console.log(error);
         }
@@ -71,13 +92,25 @@ const ContentBox = () => {
                         <div class="box-contents">
                             <div id="audit-trail">
                                 {PDFData.map((list, i) => {
-                                    return <ContentList pdfName={list.pdfName} ShowCount={list.ShowCount}></ContentList>;
+                                    return Pagenumbering > i ? (
+                                        <ContentList link_title={list.link_title} link_change_name={list.link_change_name}></ContentList>
+                                    ) : (
+                                        ''
+                                    );
                                 })}
                             </div>
+                        </div>
+                        <div className="ContentBox_NextContentShowButton">
+                            {PDFData.length < 5 || PDFData.length <= Pagenumbering ? (
+                                <></>
+                            ) : (
+                                <button onClick={() => dispatch(ClicksNextFileData())}>더보기</button>
+                            )}
                         </div>
                     </div>
                 </section>
             </aside>
+            <LoaderMainPage loading={loading}></LoaderMainPage>
         </ContentBoxMainDivBox>
     );
 };

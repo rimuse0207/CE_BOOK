@@ -44,12 +44,47 @@ const NavigationMainPage = () => {
                     onItemClick={itemId => handleCllicksNaviMenu(itemId)}
                     style={treeStyles}
                 >
-                    <Tree content="1.CE Work Flow"></Tree>
-                    <Tree content="2.TTS_(Trouble Tracking System)">
-                        <Tree content="TTS_INPUT 내용 감상 및 피드백" />
+                    <Tree
+                        content="1.CE Work Flow"
+                        open
+                        visible
+                        onClick={() => handleCllicksNaviMenu('CE Work Flow')}
+                        itemId={'CE Work Flow'}
+                        onItemClick={itemId => handleCllicksNaviMenu(itemId)}
+                    ></Tree>
+                    <Tree
+                        content="2.TTS_(Trouble Tracking System)"
+                        open
+                        visible
+                        onClick={() => handleCllicksNaviMenu('TTS_(Trouble Tracking System)')}
+                        itemId={'TTS_(Trouble Tracking System)'}
+                        onItemClick={itemId => handleCllicksNaviMenu(itemId)}
+                    >
+                        <Tree
+                            content="TTS_INPUT 내용 감상 및 피드백"
+                            open
+                            visible
+                            onClick={() => handleCllicksNaviMenu('TTS_INPUT 내용 감상 및 피드백')}
+                            itemId={'TTS_INPUT 내용 감상 및 피드백'}
+                            onItemClick={itemId => handleCllicksNaviMenu(itemId)}
+                        />
                     </Tree>
-                    <Tree content="3.Tech tool등록 방법"></Tree>
-                    <Tree content="4.용도설명서 작성 요령서"></Tree>
+                    <Tree
+                        content="3.Tech tool등록 방법"
+                        open
+                        visible
+                        onClick={() => handleCllicksNaviMenu('Tech tool등록 방법')}
+                        itemId={'Tech tool등록 방법'}
+                        onItemClick={itemId => handleCllicksNaviMenu(itemId)}
+                    ></Tree>
+                    <Tree
+                        content="4.용도설명서 작성 요령서"
+                        open
+                        visible
+                        onClick={() => handleCllicksNaviMenu('용도설명서 작성 요령서')}
+                        itemId={'용도설명서 작성 요령서'}
+                        onItemClick={itemId => handleCllicksNaviMenu(itemId)}
+                    ></Tree>
                 </Tree>
                 <Tree
                     content="Grinder"
@@ -61,15 +96,78 @@ const NavigationMainPage = () => {
                     onItemClick={itemId => handleCllicksNaviMenu(itemId)}
                     style={treeStyles}
                 >
-                    <Tree content="1.기초자료"></Tree>
-                    <Tree content="2.매뉴얼"></Tree>
-                    <Tree content="3.절차서"></Tree>
-                    <Tree content="4.One point lesson">
-                        <Tree content="One Point 대전(2019.09)" />
-                        <Tree content="One Point 대전(2019.10)" />
-                        <Tree content="One Point 대전(2019.11)" />
-                        <Tree content="One Point 대전(2020.01)" />
-                        <Tree content="One Point 대전(2020.02)" />
+                    <Tree
+                        content="1.기초자료"
+                        open
+                        visible
+                        onClick={() => handleCllicksNaviMenu('기초자료')}
+                        itemId={'기초자료'}
+                        onItemClick={itemId => handleCllicksNaviMenu(itemId)}
+                    ></Tree>
+                    <Tree
+                        content="2.매뉴얼"
+                        open
+                        visible
+                        onClick={() => handleCllicksNaviMenu('매뉴얼')}
+                        itemId={'매뉴얼'}
+                        onItemClick={itemId => handleCllicksNaviMenu(itemId)}
+                    ></Tree>
+                    <Tree
+                        content="3.절차서"
+                        open
+                        visible
+                        onClick={() => handleCllicksNaviMenu('절차서')}
+                        itemId={'절차서'}
+                        onItemClick={itemId => handleCllicksNaviMenu(itemId)}
+                    ></Tree>
+                    <Tree
+                        content="4.One point lesson"
+                        open
+                        visible
+                        onClick={() => handleCllicksNaviMenu('One point lesson')}
+                        itemId={'One point lesson'}
+                        onItemClick={itemId => handleCllicksNaviMenu(itemId)}
+                    >
+                        <Tree
+                            content="One Point 대전(2019.09)"
+                            open
+                            visible
+                            onClick={() => handleCllicksNaviMenu('One Point 대전(2019.09)')}
+                            itemId={'One Point 대전(2019.09)'}
+                            onItemClick={itemId => handleCllicksNaviMenu(itemId)}
+                        />
+                        <Tree
+                            content="One Point 대전(2019.10)"
+                            open
+                            visible
+                            onClick={() => handleCllicksNaviMenu('One Point 대전(2019.10)')}
+                            itemId={'One Point 대전(2019.10)'}
+                            onItemClick={itemId => handleCllicksNaviMenu(itemId)}
+                        />
+                        <Tree
+                            content="One Point 대전(2019.11)"
+                            open
+                            visible
+                            onClick={() => handleCllicksNaviMenu('One Point 대전(2019.11)')}
+                            itemId={'One Point 대전(2019.11)'}
+                            onItemClick={itemId => handleCllicksNaviMenu(itemId)}
+                        />
+                        <Tree
+                            content="One Point 대전(2020.01)"
+                            open
+                            visible
+                            onClick={() => handleCllicksNaviMenu('One Point 대전(2020.01)')}
+                            itemId={'One Point 대전(2020.01)'}
+                            onItemClick={itemId => handleCllicksNaviMenu(itemId)}
+                        />
+                        <Tree
+                            content="One Point 대전(2020.02)"
+                            open
+                            visible
+                            onClick={() => handleCllicksNaviMenu('One Point 대전(2020.02)')}
+                            itemId={'One Point 대전(2020.02)'}
+                            onItemClick={itemId => handleCllicksNaviMenu(itemId)}
+                        />
                     </Tree>
                 </Tree>
                 <Tree

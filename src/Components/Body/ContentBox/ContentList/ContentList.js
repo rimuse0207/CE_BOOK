@@ -7,6 +7,9 @@ const ContentListMainDivBox = styled.div`
     width: 95%;
     margin: 0 auto;
     margin-top: 30px;
+    border-bottom: 1px dashed lightgray;
+    padding-bottom: 20px;
+
     .ContentList_Main_Container {
         ::after {
             clear: both;
@@ -66,7 +69,7 @@ const ContentListMainDivBox = styled.div`
 `;
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-const ContentList = ({ pdfName, ShowCount }) => {
+const ContentList = ({ link_title, link_change_name }) => {
     const [numPages, setNumPages] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
 
@@ -80,7 +83,10 @@ const ContentList = ({ pdfName, ShowCount }) => {
                 <div className="ContentList_Main_Container">
                     <div className="ContentList_Left_Image">
                         <div className="ContentList_Left_Image_Content">
-                            <Document file={`/${pdfName}`} onLoadSuccess={onDocumentLoadSuccess}>
+                            <Document
+                                file={`${process.env.REACT_APP_API_URL}/CEBook/${link_change_name}`}
+                                onLoadSuccess={onDocumentLoadSuccess}
+                            >
                                 <Page
                                     className="rqwrwqr"
                                     height={document.getElementsByClassName('PdfDiv')[0]?.clientHeight * 0.8 ?? 150}
@@ -94,13 +100,13 @@ const ContentList = ({ pdfName, ShowCount }) => {
                     <div className="ContentList_Right_ContentText">
                         <div>
                             <div>등록자 : 유성재 | 2022-05-02</div>
-                            <h2 style={{ fontSize: '2em', marginTop: '0px' }}>{pdfName.split('.pdf')[0]}</h2>
+                            <h2 style={{ fontSize: '2em', marginTop: '0px' }}>{link_title}</h2>
                             <div>
-                                <p>
+                                {/* <p>
                                     프로세스 자동화를 피해가는 길은 없습니다. 디지털화 전략을 추구하는 기업이라면 더욱 그렇습니다. 그렇게
                                     보면 12개월 내에 RPA에 투자할 것이라고 답한 기업의 비율이 70%에 육박하는 것도 당연합니다. 이중 약 40%는
                                     이미 RPA에 100만 유로이상의 예산을 책정했습니다.
-                                </p>
+                                </p> */}
                             </div>
                             <div className="ConentList_hashTag">
                                 <span>#Grinder </span>
@@ -111,7 +117,7 @@ const ContentList = ({ pdfName, ShowCount }) => {
                             </div>
                             <div
                                 className="ContentList_DetailMore"
-                                onClick={() => window.open(`/ShowPdf/${pdfName}`, 'AfterOT', 'width=1200, height=900')}
+                                onClick={() => window.open(`/ShowPdf/${link_change_name}`, 'AfterOT', 'width=1200, height=900')}
                             >
                                 자세히보기
                             </div>
@@ -125,7 +131,7 @@ const ContentList = ({ pdfName, ShowCount }) => {
                                 <span>
                                     <TbEyeCheck></TbEyeCheck>
                                 </span>
-                                <span>{ShowCount}</span>
+                                {/* <span>{ShowCount}</span> */}
                             </div>
                         </div>
                     </div>

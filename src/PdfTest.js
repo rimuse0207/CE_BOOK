@@ -216,7 +216,11 @@ const PdfTest = () => {
             </div>
             <div className="MainContentCotainer">
                 <div className="SideMenuPreView">
-                    <Document file={`/${ID}`} onLoadSuccess={onDocumentLoadSuccess} id={'PdfViwerTest'}>
+                    <Document
+                        file={`${process.env.REACT_APP_API_URL}/CEBook/${ID}`}
+                        onLoadSuccess={onDocumentLoadSuccess}
+                        id={'PdfViwerTest'}
+                    >
                         {Array.from(new Array(numPages), (_, index) => (
                             <div id="PdfFileListContainer">
                                 <div
@@ -239,7 +243,11 @@ const PdfTest = () => {
                 </div>
 
                 <div id="test" style={{ textAlign: 'center' }} onContextMenu={e => e.preventDefault()}>
-                    <Document file={`/${ID}`} onLoadSuccess={onDocumentLoadSuccess} className="adadadad">
+                    <Document
+                        file={`${process.env.REACT_APP_API_URL}/CEBook/${ID}`}
+                        onLoadSuccess={onDocumentLoadSuccess}
+                        className="adadadad"
+                    >
                         {Array.from(new Array(numPages), (_, index) => (
                             <div className="PdfFileListContainer_mainContant">
                                 <div className="PdfViwerContainer">
