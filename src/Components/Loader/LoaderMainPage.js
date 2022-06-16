@@ -4,10 +4,10 @@ import { css } from '@emotion/react';
 import PulseLoader from 'react-spinners/PulseLoader';
 
 const LoaderMainPageMainDivBox = styled.div`
-    position: fixed;
+    ${props => (props.loading ? 'position: fixed' : 'display:none')};
     width: 100vw;
     height: 100vh;
-    background: rgba(255, 255, 255, 0.5);
+    background: ${props => (props.loading ? 'rgba(255, 255, 255, 0.5)' : 'none')};
     top: 0;
     left: 0;
 
@@ -27,8 +27,9 @@ const override = css`
 `;
 
 const LoaderMainPage = ({ loading }) => {
+    console.log(loading);
     return (
-        <LoaderMainPageMainDivBox>
+        <LoaderMainPageMainDivBox loading={loading}>
             <div className="sweet-loading">
                 <PulseLoader color={'#0a0ef3'} loading={loading} css={override} size={30} />
             </div>

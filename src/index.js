@@ -26,7 +26,7 @@ root.render(
     <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}></PersistGate>
         <React.StrictMode>
-            <RouterPage></RouterPage>
+            <RouterPage onContextMenu={e => e.preventDefault()}></RouterPage>
         </React.StrictMode>
     </Provider>
 );

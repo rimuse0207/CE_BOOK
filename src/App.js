@@ -2,7 +2,7 @@ import './App.css';
 import BodyMainPage from './Components/Body/BodyMainPage';
 import HeaderMainPage from './Components/Header/HeaderMainPage';
 import NavigationMainPage from './Components/Navigation/NavigationMainPage';
-import PdfTest from './PdfTest';
+import PdfMainPage from './Components/Body/PDFShow/PdfMainPage';
 import styled from 'styled-components';
 
 const AppMainFloatContainer = styled.div`
@@ -24,7 +24,7 @@ const AppMainFloatContainer = styled.div`
 
 function App() {
     return (
-        <div className="App" style={{ backgroundColor: '#F5F5F5', minHeight: '100vh' }}>
+        <div className="App" style={{ backgroundColor: '#F5F5F5', minHeight: '100vh' }} onContextMenu={e => e.preventDefault()}>
             <HeaderMainPage></HeaderMainPage>
             <AppMainFloatContainer>
                 <div className="AppMain_Float_Left">

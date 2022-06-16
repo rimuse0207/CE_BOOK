@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
-import useWindowSize from './useWindowSize';
+import useWindowSize from '../../../useWindowSize';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { MdScreenRotation } from 'react-icons/md';
@@ -93,13 +93,32 @@ const PdfTestMainDivBox = styled.div`
                 width: 100%;
                 position: relative;
                 overflow: hidden;
+                border: 10px solid red;
                 .PrintBlock_WaterMark_bottom {
                     position: absolute;
-                    font-size: 2em;
+                    /* font-size: 2em; */
                     transform: rotate(-45deg);
-                    top: -20%;
-                    left: 30%;
-                    /* transform: translate(-20%, -30%); */
+                    top: -350px;
+                    right: 0px;
+                    color: black;
+                    z-index: 0;
+                    user-select: none;
+                    -moz-user-select: none;
+                    -khtml-user-select: none;
+                    -webkit-user-select: none;
+                    -o-user-select: none;
+
+                    div {
+                        opacity: 0.15;
+                        margin: 20px;
+                    }
+                }
+                .PrintBlock_WaterMark_top {
+                    position: absolute;
+                    /* font-size: 2em; */
+                    transform: rotate(-45deg);
+                    top: -350px;
+                    left: 0px;
                     color: black;
                     z-index: 0;
                     user-select: none;
@@ -132,7 +151,7 @@ const PdfTestMainDivBox = styled.div`
 `;
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-const PdfTest = () => {
+const PdfMainPage = () => {
     const { ID } = useParams();
     const windowSize = useWindowSize();
     const [numPages, setNumPages] = useState(null);
@@ -204,11 +223,21 @@ const PdfTest = () => {
                     </div>
                     <div>|</div>
                     <div>
-                        <span className="PageZoom" onClick={() => setPageZoomNumber(pageZoomNumber - 25)}>
+                        <span
+                            className="PageZoom"
+                            onClick={() => {
+                                pageZoomNumber === 50 ? alert('축소 불가') : setPageZoomNumber(pageZoomNumber - 25);
+                            }}
+                        >
                             -
                         </span>
                         <span>{pageZoomNumber}%</span>
-                        <span className="PageZoom" onClick={() => setPageZoomNumber(pageZoomNumber + 25)}>
+                        <span
+                            className="PageZoom"
+                            onClick={() => {
+                                pageZoomNumber === 150 ? alert('확대 불가') : setPageZoomNumber(pageZoomNumber + 25);
+                            }}
+                        >
                             +
                         </span>
                     </div>
@@ -290,6 +319,36 @@ const PdfTest = () => {
                                     <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
                                     <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
                                 </div>
+                                <div className="PrintBlock_WaterMark_top">
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                </div>
                             </div>
                         ))}
                     </Document>
@@ -299,4 +358,4 @@ const PdfTest = () => {
     );
 };
 
-export default PdfTest;
+export default PdfMainPage;

@@ -61,22 +61,30 @@ const ContentBoxMainDivBox = styled.div`
 const ContentBox = () => {
     const NaviClicksData = useSelector(state => state.NaviSelectCheck.NaviClickTitle);
     const Pagenumbering = useSelector(state => state.NaviSelectCheck.Pagenumber);
+    const SearchData = useSelector(state => state.SearchSelectCheck.SearchName);
     const dispatch = useDispatch();
     const [PDFData, setPDFData] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (NaviClicksData) {
+            setLoading(true);
             GetPDFFileData();
         }
-    }, [NaviClicksData]);
+    }, [NaviClicksData, SearchData]);
 
     const GetPDFFileData = async () => {
         try {
             const getPDFFileDatas = await InfoGet(`${process.env.REACT_APP_API_URL}/CeBook_app_server/navi_data`, NaviClicksData, 0);
             if (getPDFFileDatas.data.dataSuccess) {
+                console.log(getPDFFileDatas);
                 setPDFData(getPDFFileDatas.data.root_public);
+                setTimeout(() => {
+                    setLoading(false);
+                }, 3000);
             } else {
+                alert('에러');
+                setLoading(false);
             }
         } catch (error) {
             console.log(error);
@@ -93,7 +101,12 @@ const ContentBox = () => {
                             <div id="audit-trail">
                                 {PDFData.map((list, i) => {
                                     return Pagenumbering > i ? (
-                                        <ContentList link_title={list.link_title} link_change_name={list.link_change_name}></ContentList>
+                                        <ContentList
+                                            link_title={list.link_title}
+                                            link_change_name={list.link_change_name}
+                                            link_write_date={list.link_write_date}
+                                            link_write_name={list.link_write_name}
+                                        ></ContentList>
                                     ) : (
                                         ''
                                     );

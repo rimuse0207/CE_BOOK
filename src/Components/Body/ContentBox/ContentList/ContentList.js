@@ -69,7 +69,7 @@ const ContentListMainDivBox = styled.div`
 `;
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-const ContentList = ({ link_title, link_change_name }) => {
+const ContentList = ({ link_title, link_change_name, link_write_name, link_write_date }) => {
     const [numPages, setNumPages] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
 
@@ -99,7 +99,9 @@ const ContentList = ({ link_title, link_change_name }) => {
                     </div>
                     <div className="ContentList_Right_ContentText">
                         <div>
-                            <div>등록자 : 유성재 | 2022-05-02</div>
+                            <div>
+                                등록자 : {link_write_name} | {link_write_date}
+                            </div>
                             <h2 style={{ fontSize: '2em', marginTop: '0px' }}>{link_title}</h2>
                             <div>
                                 {/* <p>
