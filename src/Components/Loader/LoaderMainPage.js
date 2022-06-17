@@ -27,7 +27,6 @@ const override = css`
 `;
 
 const LoaderMainPage = ({ loading }) => {
-    console.log(loading);
     return (
         <LoaderMainPageMainDivBox loading={loading}>
             <div className="sweet-loading">

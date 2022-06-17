@@ -1,8 +1,9 @@
 import React from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import ContentBox from './ContentBox/ContentBox';
 import SearchBarMainPage from './SearchBar/SearchBarMainPage';
-
+import { toast } from '../ToastMessage/ToastManager';
 const BodyMainPageContainer = styled.div`
     .BodyMainPageContainer {
     }
@@ -13,6 +14,13 @@ const BodyMainPageContainer = styled.div`
 `;
 
 const BodyMainPage = () => {
+    useEffect(() => {
+        toast.show({
+            title: `ID 또는 패스워드를 확인 해 주세요.`,
+            successCheck: false,
+            duration: 3000,
+        });
+    }, []);
     return (
         <BodyMainPageContainer>
             <div className="BodyMainPageContainer">

@@ -75,7 +75,11 @@ const ContentBox = () => {
 
     const GetPDFFileData = async () => {
         try {
-            const getPDFFileDatas = await InfoGet(`${process.env.REACT_APP_API_URL}/CeBook_app_server/navi_data`, NaviClicksData, 0);
+            const getPDFFileDatas = await InfoGet(
+                `${process.env.REACT_APP_API_URL}/CeBook_app_server/navi_data`,
+                NaviClicksData,
+                SearchData
+            );
             if (getPDFFileDatas.data.dataSuccess) {
                 console.log(getPDFFileDatas);
                 setPDFData(getPDFFileDatas.data.root_public);
@@ -96,21 +100,27 @@ const ContentBox = () => {
             <aside id="info-block">
                 <section class="file-marker">
                     <div>
-                        <div class="box-title">{NaviClicksData}</div>
+                        <div class="box-title">
+                            {NaviClicksData}({PDFData.length})
+                        </div>
                         <div class="box-contents">
                             <div id="audit-trail">
-                                {PDFData.map((list, i) => {
-                                    return Pagenumbering > i ? (
-                                        <ContentList
-                                            link_title={list.link_title}
-                                            link_change_name={list.link_change_name}
-                                            link_write_date={list.link_write_date}
-                                            link_write_name={list.link_write_name}
-                                        ></ContentList>
-                                    ) : (
-                                        ''
-                                    );
-                                })}
+                                {PDFData.length === 0
+                                    ? '목록이 존재 하지 않습니다.'
+                                    : PDFData.map((list, i) => {
+                                          return Pagenumbering > i ? (
+                                              <ContentList
+                                                  key={list.link_indexs}
+                                                  link_title={list.link_title}
+                                                  link_change_name={list.link_change_name}
+                                                  link_write_date={list.link_write_date}
+                                                  link_write_name={list.link_write_name}
+                                                  link_hash_tag={list.link_hash_tag}
+                                              ></ContentList>
+                                          ) : (
+                                              ''
+                                          );
+                                      })}
                             </div>
                         </div>
                         <div className="ContentBox_NextContentShowButton">

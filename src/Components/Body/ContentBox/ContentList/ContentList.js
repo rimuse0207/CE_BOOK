@@ -69,7 +69,7 @@ const ContentListMainDivBox = styled.div`
 `;
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-const ContentList = ({ link_title, link_change_name, link_write_name, link_write_date }) => {
+const ContentList = ({ link_title, link_change_name, link_write_name, link_write_date, link_hash_tag }) => {
     const [numPages, setNumPages] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
 
@@ -111,11 +111,9 @@ const ContentList = ({ link_title, link_change_name, link_write_name, link_write
                                 </p> */}
                             </div>
                             <div className="ConentList_hashTag">
-                                <span>#Grinder </span>
-                                <span>#Laser </span>
-                                <span>#Dicer </span>
-                                <span>#공용 </span>
-                                <span>#장비 </span>
+                                {link_hash_tag.map((item, j) => {
+                                    return <span key={item.hash_tag_indexs}>#{item.hash_tag_name}</span>;
+                                })}
                             </div>
                             <div
                                 className="ContentList_DetailMore"

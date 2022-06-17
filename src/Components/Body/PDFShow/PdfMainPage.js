@@ -93,7 +93,7 @@ const PdfTestMainDivBox = styled.div`
                 width: 100%;
                 position: relative;
                 overflow: hidden;
-                border: 10px solid red;
+
                 .PrintBlock_WaterMark_bottom {
                     position: absolute;
                     /* font-size: 2em; */
