@@ -60,6 +60,7 @@ const ContentBoxMainDivBox = styled.div`
 
 const ContentBox = () => {
     const NaviClicksData = useSelector(state => state.NaviSelectCheck.NaviClickTitle);
+    const NaviClicksDataIndexs = useSelector(state => state.NaviSelectCheck.NaviClickIndexs);
     const Pagenumbering = useSelector(state => state.NaviSelectCheck.Pagenumber);
     const SearchData = useSelector(state => state.SearchSelectCheck.SearchName);
     const dispatch = useDispatch();
@@ -77,11 +78,10 @@ const ContentBox = () => {
         try {
             const getPDFFileDatas = await InfoGet(
                 `${process.env.REACT_APP_API_URL}/CeBook_app_server/navi_data`,
-                NaviClicksData,
+                NaviClicksDataIndexs,
                 SearchData
             );
             if (getPDFFileDatas.data.dataSuccess) {
-                console.log(getPDFFileDatas);
                 setPDFData(getPDFFileDatas.data.root_public);
                 setTimeout(() => {
                     setLoading(false);

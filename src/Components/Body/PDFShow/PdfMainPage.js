@@ -97,7 +97,7 @@ const PdfTestMainDivBox = styled.div`
                 .PrintBlock_WaterMark_bottom {
                     position: absolute;
                     /* font-size: 2em; */
-                    transform: rotate(-45deg);
+                    transform: rotate(-25deg);
                     top: -350px;
                     right: 0px;
                     color: black;
@@ -116,7 +116,7 @@ const PdfTestMainDivBox = styled.div`
                 .PrintBlock_WaterMark_top {
                     position: absolute;
                     /* font-size: 2em; */
-                    transform: rotate(-45deg);
+                    transform: rotate(-25deg);
                     top: -350px;
                     left: 0px;
                     color: black;
@@ -290,64 +290,18 @@ const PdfMainPage = () => {
                                     />
                                 </div>
                                 <div className="PrintBlock_WaterMark_bottom">
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    {Array(50)
+                                        .fill(0)
+                                        .map(index => {
+                                            return <div key={index}>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>;
+                                        })}
                                 </div>
                                 <div className="PrintBlock_WaterMark_top">
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
-                                    <div>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>
+                                    {Array(50)
+                                        .fill(0)
+                                        .map(index => {
+                                            return <div key={index}>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>;
+                                        })}
                                 </div>
                             </div>
                         ))}

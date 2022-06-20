@@ -32,7 +32,7 @@ const SearchBarMainPage = () => {
     const handleSearchData = async e => {
         e.preventDefault();
         await dispatch(SearchSelectCheckRedux(SearchNames));
-        await dispatch(NaviSelectCheckRedux('검색'));
+        await dispatch(NaviSelectCheckRedux(0, '검색'));
     };
 
     return (
