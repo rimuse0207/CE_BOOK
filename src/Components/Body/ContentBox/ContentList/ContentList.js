@@ -3,6 +3,11 @@ import styled from 'styled-components';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { TbEyeCheck } from 'react-icons/tb';
 import { AiFillHeart } from 'react-icons/ai';
+import { ClicksCEPDF } from '../../../../Api/ContentAPI/ContentAPI';
+import { useSelector } from 'react-redux';
+import { TbWritingSign } from 'react-icons/tb';
+import { useEffect } from 'react';
+
 const ContentListMainDivBox = styled.div`
     width: 95%;
     margin: 0 auto;
@@ -52,8 +57,8 @@ const ContentListMainDivBox = styled.div`
             }
             .ContanteList_HeartCount {
                 position: absolute;
-                top: 0px;
-                left: 200px;
+                bottom: 0px;
+                right: 0px;
                 :hover {
                     cursor: pointer;
                 }
@@ -66,16 +71,100 @@ const ContentListMainDivBox = styled.div`
             }
         }
     }
+    .Delete_HashTag {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .container_Delete_HashTag {
+        margin-left: 5px;
+        margin-right: 5px;
+        :hover {
+            cursor: pointer;
+            color: red;
+        }
+    }
 `;
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-const ContentList = ({ link_title, link_change_name, link_write_name, link_write_date, link_hash_tag }) => {
+const ContentList = ({ link_title, link_change_name, link_write_name, link_write_date, link_hash_tag, link_indexs, link_show_count }) => {
     const [numPages, setNumPages] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
+    const LoginCheckData = useSelector(state => state.LoginCheck.email);
+    const [HashTagWrite, setHashTagWrite] = useState(false);
+    const [HashTagInputData, setHashTagInputData] = useState('');
+    const [HashTagData, setHashTagData] = useState(link_hash_tag);
 
     function onDocumentLoadSuccess({ numPages }) {
         setNumPages(numPages);
     }
+
+    const handleDataClick = async (data, ListData) => {
+        try {
+            const getServerClicksSend = await ClicksCEPDF(
+                `${process.env.REACT_APP_API_URL}/CeBook_app_server/ShowPdfClicks`,
+                LoginCheckData,
+                link_indexs
+            );
+            if (getServerClicksSend.data.dataSuccess) {
+                window.open(`/ShowPdf/${data}`, 'AfterOT', 'width=1200, height=900');
+            } else {
+                alert('에러');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleHashTagAdd = async e => {
+        try {
+            e.preventDefault();
+
+            const pdfData = {
+                hash_tag_name: HashTagInputData,
+                hash_tag_link_indexs: link_indexs,
+            };
+            const GetHashTagData = await ClicksCEPDF(
+                `${process.env.REACT_APP_API_URL}/CeBook_app_server/AddHashTagData`,
+                LoginCheckData,
+                pdfData
+            );
+            if (GetHashTagData.data.dataSuccess) {
+                setHashTagData(GetHashTagData.data.data);
+                setHashTagWrite(false);
+                setHashTagInputData('');
+            } else {
+                alert('해쉬 테그 등록 에러');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const hashtagDelete = async data => {
+        try {
+            const GetHashTagData = await ClicksCEPDF(
+                `${process.env.REACT_APP_API_URL}/CeBook_app_server/HashTagDelete`,
+                LoginCheckData,
+                data
+            );
+            if (GetHashTagData.data.dataSuccess) {
+                const deleteData = HashTagData.filter(item => {
+                    return item.hash_tag_indexs === data.hash_tag_indexs ? '' : item;
+                });
+                setHashTagData(deleteData);
+                setHashTagWrite(false);
+            } else {
+                alert('해쉬 삭제 에러');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        console.log(document.getElementById('iframe1').onload);
+        console.log(document.getElementById('sizer'));
+    }, []);
 
     return (
         <ContentListMainDivBox>
@@ -83,7 +172,7 @@ const ContentList = ({ link_title, link_change_name, link_write_name, link_write
                 <div className="ContentList_Main_Container">
                     <div className="ContentList_Left_Image">
                         <div className="ContentList_Left_Image_Content">
-                            <Document
+                            {/* <Document
                                 file={`${process.env.REACT_APP_API_URL}/CEBook/${link_change_name}`}
                                 onLoadSuccess={onDocumentLoadSuccess}
                             >
@@ -94,7 +183,21 @@ const ContentList = ({ link_title, link_change_name, link_write_name, link_write
                                     pageNumber={1}
                                     renderAnnotationLayer={false}
                                 />
-                            </Document>
+                            </Document> */}
+                            <object
+                                data={`${process.env.REACT_APP_API_URL}/CEBook/${link_change_name}#toolbar=0&navpane=0`}
+                                type="application/pdf"
+                                width="100%"
+                                height="100%"
+                                frameBorder="0"
+                                scrolling="no"
+                                cellSpacing="0"
+                                allow=""
+                                style={{ height: '100%', overflow: 'hidden' }}
+                                id="iframe1"
+                            >
+                                <div>파일 오류입니다.</div>
+                            </object>
                         </div>
                     </div>
                     <div className="ContentList_Right_ContentText">
@@ -111,27 +214,61 @@ const ContentList = ({ link_title, link_change_name, link_write_name, link_write
                                 </p> */}
                             </div>
                             <div className="ConentList_hashTag">
-                                {link_hash_tag.map((item, j) => {
-                                    return <span key={item.hash_tag_indexs}>#{item.hash_tag_name}</span>;
-                                })}
+                                {HashTagWrite ? (
+                                    <div>
+                                        <form onSubmit={e => handleHashTagAdd(e)}>
+                                            <input
+                                                placeholder="등록할 Hashtag 입력"
+                                                value={HashTagInputData}
+                                                onChange={e => setHashTagInputData(e.target.value)}
+                                            ></input>
+                                            <button>추가</button>
+                                        </form>
+                                        <div>
+                                            {HashTagData.map((item, j) => {
+                                                return item.hash_tag_writer_id === LoginCheckData ? (
+                                                    <span
+                                                        className="container_Delete_HashTag"
+                                                        key={item.hash_tag_indexs}
+                                                        onClick={() => hashtagDelete(item)}
+                                                    >
+                                                        {item.hash_tag_name}
+                                                        <span className="Delete_HashTag">X</span>
+                                                    </span>
+                                                ) : (
+                                                    <span className="container_Delete_HashTag" key={item.hash_tag_indexs}>
+                                                        {item.hash_tag_name}
+                                                    </span>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                ) : (
+                                    HashTagData.map((item, j) => {
+                                        return <span key={item.hash_tag_indexs}>#{item.hash_tag_name}</span>;
+                                    })
+                                )}
                             </div>
-                            <div
-                                className="ContentList_DetailMore"
-                                onClick={() => window.open(`/ShowPdf/${link_change_name}`, 'AfterOT', 'width=1200, height=900')}
-                            >
+                            <div className="ContentList_DetailMore" onClick={() => handleDataClick(link_change_name)}>
                                 자세히보기
                             </div>
-                            {/* <div className="ContanteList_HeartCount">
-                                <span style={{ color: 'red' }}>
-                                    <AiFillHeart></AiFillHeart>
-                                </span>
-                                <span>100</span>
-                            </div> */}
+                            <div className="ContanteList_HeartCount" onClick={() => setHashTagWrite(true)}>
+                                {HashTagWrite ? (
+                                    <></>
+                                ) : (
+                                    <div>
+                                        <span style={{ color: 'black', fontSize: '20px' }}>
+                                            <TbWritingSign></TbWritingSign>
+                                        </span>
+                                        <span>hashtag 작성</span>
+                                    </div>
+                                )}
+                            </div>
                             <div className="ContanteList_ShowCount">
                                 <span>
                                     <TbEyeCheck></TbEyeCheck>
                                 </span>
-                                {/* <span>{ShowCount}</span> */}
+                                <span>{link_show_count.length}</span>
                             </div>
                         </div>
                     </div>

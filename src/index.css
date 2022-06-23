@@ -24,3 +24,12 @@ body {
     cursor: pointer;
     color: blue;
 }
+
+#end,
+#toolbar {
+    display: none !important;
+}
+#sizer {
+    height: 100px;
+    overflow: hidden;
+}

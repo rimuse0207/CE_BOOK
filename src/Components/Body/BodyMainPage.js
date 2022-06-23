@@ -14,13 +14,13 @@ const BodyMainPageContainer = styled.div`
 `;
 
 const BodyMainPage = () => {
-    useEffect(() => {
-        toast.show({
-            title: `ID 또는 패스워드를 확인 해 주세요.`,
-            successCheck: false,
-            duration: 3000,
-        });
-    }, []);
+    // useEffect(() => {
+    //     toast.show({
+    //         title: `ID 또는 패스워드를 확인 해 주세요.`,
+    //         successCheck: false,
+    //         duration: 3000,
+    //     });
+    // }, []);
     return (
         <BodyMainPageContainer>
             <div className="BodyMainPageContainer">

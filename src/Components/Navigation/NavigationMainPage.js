@@ -363,7 +363,15 @@ const NavigationMainPage = () => {
                     onItemClick={itemId => handleCllicksNaviMenu(itemId, 'Laser')}
                     style={treeStyles}
                 >
-                    <Tree content="1.기초자료">
+                    <Tree
+                        content="1.기초자료"
+                        open
+                        visible
+                        // onClick={() => handleCllicksNaviMenu('Laser')}
+                        itemId={4}
+                        onItemClick={itemId => handleCllicksNaviMenu(itemId, 'Laser')}
+                        style={treeStyles}
+                    >
                         <Tree content="2.매뉴얼" />
                         <Tree content="3.절차서" />
                         <Tree content="4.One point lesson" />

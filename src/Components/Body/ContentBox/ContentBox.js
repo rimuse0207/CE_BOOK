@@ -68,7 +68,7 @@ const ContentBox = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (NaviClicksData) {
+        if (NaviClicksData || SearchData !== '') {
             setLoading(true);
             GetPDFFileData();
         }
@@ -116,6 +116,8 @@ const ContentBox = () => {
                                                   link_write_date={list.link_write_date}
                                                   link_write_name={list.link_write_name}
                                                   link_hash_tag={list.link_hash_tag}
+                                                  link_indexs={list.link_indexs}
+                                                  link_show_count={list.link_show_count}
                                               ></ContentList>
                                           ) : (
                                               ''

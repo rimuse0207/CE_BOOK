@@ -4,6 +4,9 @@ import useWindowSize from '../../../useWindowSize';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { MdScreenRotation } from 'react-icons/md';
+import { useSelector } from 'react-redux';
+import moment from 'moment';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const PdfTestMainDivBox = styled.div`
     background-color: #525659;
@@ -98,8 +101,8 @@ const PdfTestMainDivBox = styled.div`
                     position: absolute;
                     /* font-size: 2em; */
                     transform: rotate(-25deg);
-                    top: -350px;
-                    right: 0px;
+                    top: -200px;
+                    right: -300px;
                     color: black;
                     z-index: 0;
                     user-select: none;
@@ -117,8 +120,27 @@ const PdfTestMainDivBox = styled.div`
                     position: absolute;
                     /* font-size: 2em; */
                     transform: rotate(-25deg);
-                    top: -350px;
-                    left: 0px;
+                    top: -200px;
+                    right: 0px;
+                    color: black;
+                    z-index: 0;
+                    user-select: none;
+                    -moz-user-select: none;
+                    -khtml-user-select: none;
+                    -webkit-user-select: none;
+                    -o-user-select: none;
+
+                    div {
+                        opacity: 0.15;
+                        margin: 20px;
+                    }
+                }
+                .PrintBlock_WaterMark_left {
+                    position: absolute;
+                    /* font-size: 2em; */
+                    transform: rotate(-25deg);
+                    top: -200px;
+                    left: 300px;
                     color: black;
                     z-index: 0;
                     user-select: none;
@@ -144,7 +166,7 @@ const PdfTestMainDivBox = styled.div`
     }
 
     @media print {
-        #test {
+        #root {
             display: none;
         }
     }
@@ -159,6 +181,8 @@ const PdfMainPage = () => {
     const [pageZoomNumber, setPageZoomNumber] = useState(100);
     const [rotateSetting, setrotateSetting] = useState(0);
     const [PositionChange, setPositionChange] = useState(false);
+    const LoginCheckData = useSelector(state => state.LoginCheck);
+    const [infiniteData, setInfiniteData] = useState(1);
 
     function onDocumentLoadSuccess({ numPages }) {
         setNumPages(numPages);
@@ -289,23 +313,47 @@ const PdfMainPage = () => {
                                         renderAnnotationLayer={false}
                                     />
                                 </div>
-                                <div className="PrintBlock_WaterMark_bottom">
+                                {/* <div className="PrintBlock_WaterMark_bottom">
                                     {Array(50)
                                         .fill(0)
                                         .map(index => {
-                                            return <div key={index}>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>;
+                                            return (
+                                                <div key={index}>
+                                                    {LoginCheckData.name}/{LoginCheckData.email}-IP[{LoginCheckData.ip}]/
+                                                    {moment().format('YYYY-MM-DD')}
+                                                </div>
+                                            );
                                         })}
                                 </div>
                                 <div className="PrintBlock_WaterMark_top">
                                     {Array(50)
                                         .fill(0)
                                         .map(index => {
-                                            return <div key={index}>sjyoo@dhk.co.kr-IP[192.168.2.155]/2022-06-13</div>;
+                                            return (
+                                                <div key={index}>
+                                                    {LoginCheckData.name}/{LoginCheckData.email}-IP[{LoginCheckData.ip}]/
+                                                    {moment().format('YYYY-MM-DD')}
+                                                </div>
+                                            );
                                         })}
                                 </div>
+                                <div className="PrintBlock_WaterMark_left">
+                                    {Array(50)
+                                        .fill(0)
+                                        .map(index => {
+                                            return (
+                                                <div key={index}>
+                                                    {LoginCheckData.name}/{LoginCheckData.email}-IP[{LoginCheckData.ip}]/
+                                                    {moment().format('YYYY-MM-DD')}
+                                                </div>
+                                            );
+                                        })}
+                                </div> */}
                             </div>
                         ))}
                     </Document>
+                    {/* <iframe src={`${process.env.REACT_APP_API_URL}/CEBook/${ID}`} style="width:700px;height:700px;"></iframe> */}
+                    {/* <embed src={`${process.env.REACT_APP_API_URL}/CEBook/${ID}`} type="application/pdf" width="700px" height="700px" /> */}
                 </div>
             </div>
         </PdfTestMainDivBox>
