@@ -20,9 +20,11 @@ const PdfTestMainDivBox = styled.div`
             display: none !important;
         }
     }
+    embed {
+        /* pointer-events: none; */
+    }
 `;
 
-// pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 const EmbedMainPage = () => {
     const { ID } = useParams();
     const windowSize = useWindowSize();
@@ -36,8 +38,9 @@ const EmbedMainPage = () => {
     return (
         <PdfTestMainDivBox>
             <div id="PDFContainer">
-                {/* <iframe src={`${process.env.REACT_APP_API_URL}/CEBook/${ID}`} style="width:700px;height:700px;"></iframe> */}
+                {/* <iframe src={`${process.env.REACT_APP_API_URL}/CEBook/${ID}`} width="100%" height="100%"></iframe> */}
                 <embed src={`${process.env.REACT_APP_API_URL}/CEBook/${ID}`} type="application/pdf" width="100%" height="100%" />
+                {/* <iframe src={`C:\Users\Yoo SungJae\Desktop\CEBook\aaaa01.pdf`} type="application/pdf" width="100%" height="100%"></iframe> */}
             </div>
         </PdfTestMainDivBox>
     );

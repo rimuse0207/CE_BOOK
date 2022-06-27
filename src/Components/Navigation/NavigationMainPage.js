@@ -3,6 +3,7 @@ import Tree from 'react-animated-tree-v2';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { NaviSelectCheckRedux } from '../../Models/NaviSelectRedux/NaviSelectRedux';
+import { SearchSelectCheckRedux } from '../../Models/SearchSelectRedux/SearchSelectRedux';
 
 const NavigationMainPageContainer = styled.div`
     width: 80%;
@@ -22,9 +23,10 @@ const typeStyles = {
 const NavigationMainPage = () => {
     const dispatch = useDispatch();
 
-    const handleCllicksNaviMenu = (clickMenu, DatasName) => {
+    const handleCllicksNaviMenu = async (clickMenu, DatasName) => {
         try {
-            dispatch(NaviSelectCheckRedux(clickMenu, DatasName));
+            await dispatch(NaviSelectCheckRedux(clickMenu, DatasName));
+            await dispatch(SearchSelectCheckRedux(''));
         } catch (error) {
             console.log(error);
         }
@@ -372,9 +374,9 @@ const NavigationMainPage = () => {
                         onItemClick={itemId => handleCllicksNaviMenu(itemId, 'Laser')}
                         style={treeStyles}
                     >
-                        <Tree content="2.매뉴얼" />
-                        <Tree content="3.절차서" />
-                        <Tree content="4.One point lesson" />
+                        <Tree content="2.매뉴얼" itemId={4} />
+                        <Tree content="3.절차서" itemId={4} />
+                        <Tree content="4.One point lesson" itemId={4} />
                     </Tree>
                 </Tree>
             </NavigationMainPageContainer>

@@ -7,6 +7,7 @@ import axios from 'axios';
 import { InfoGet } from '../../../Api/ContentAPI/ContentAPI';
 import { ClicksNextFileData } from '../../../Models/NaviSelectRedux/NaviSelectRedux';
 import LoaderMainPage from '../../Loader/LoaderMainPage';
+import { useMemo } from 'react';
 
 const ContentBoxMainDivBox = styled.div`
     min-height: 70vh;
@@ -68,11 +69,18 @@ const ContentBox = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (NaviClicksData || SearchData !== '') {
+        if (NaviClicksDataIndexs !== 0) {
             setLoading(true);
             GetPDFFileData();
         }
-    }, [NaviClicksData, SearchData]);
+    }, [NaviClicksData]);
+
+    useEffect(() => {
+        if (SearchData) {
+            setLoading(true);
+            GetSearchedPDFFileData();
+        }
+    }, [SearchData]);
 
     const GetPDFFileData = async () => {
         try {
@@ -81,6 +89,36 @@ const ContentBox = () => {
                 NaviClicksDataIndexs,
                 SearchData
             );
+            if (getPDFFileDatas.data.IpCheck) {
+                alert('해당 IP로 접속이 불가 합니다.');
+                return;
+            }
+
+            if (getPDFFileDatas.data.dataSuccess) {
+                setPDFData(getPDFFileDatas.data.root_public);
+                setTimeout(() => {
+                    setLoading(false);
+                }, 3000);
+            } else {
+                alert('에러');
+                setLoading(false);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const GetSearchedPDFFileData = async () => {
+        try {
+            const getPDFFileDatas = await InfoGet(
+                `${process.env.REACT_APP_API_URL}/CeBook_app_server/SearchText`,
+                NaviClicksDataIndexs,
+                SearchData
+            );
+            if (getPDFFileDatas.data.IpCheck) {
+                alert('해당 IP로 접속이 불가 합니다.');
+                return;
+            }
             if (getPDFFileDatas.data.dataSuccess) {
                 setPDFData(getPDFFileDatas.data.root_public);
                 setTimeout(() => {
@@ -98,12 +136,12 @@ const ContentBox = () => {
     return (
         <ContentBoxMainDivBox>
             <aside id="info-block">
-                <section class="file-marker">
+                <section className="file-marker">
                     <div>
-                        <div class="box-title">
+                        <div className="box-title">
                             {NaviClicksData}({PDFData.length})
                         </div>
-                        <div class="box-contents">
+                        <div className="box-contents">
                             <div id="audit-trail">
                                 {PDFData.length === 0
                                     ? '목록이 존재 하지 않습니다.'

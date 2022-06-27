@@ -23,9 +23,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}></PersistGate>
-        <React.StrictMode>
-            <RouterPage onContextMenu={e => e.preventDefault()}></RouterPage>
-        </React.StrictMode>
+        {/* <React.StrictMode> */}
+        <RouterPage onContextMenu={e => e.preventDefault()}></RouterPage>
+        {/* </React.StrictMode> */}
     </Provider>
 );
 

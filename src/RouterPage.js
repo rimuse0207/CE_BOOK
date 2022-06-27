@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux/es/exports';
 import LoginMainPage from './Components/Body/Login/LoginMainPage';
 import PdfMainPageEmbed from './Components/Body/PDFShow/PdfMainPageEmbed';
 import EmbedMainPage from './Components/Body/PDFShow/EmbedMainPage';
+import IframeTag from './Components/Body/PDFShow/IframeTag';
 const RouterPage = () => {
     const LoginCheckData = useSelector(state => state.LoginCheck);
     return (
@@ -18,6 +19,7 @@ const RouterPage = () => {
                             <Route exact path="/" component={App}></Route>
                             <Route exact path="/:HeaderTokenNames" component={App}></Route>
                             <Route exact path="/ShowPdf/:ID" component={EmbedMainPage}></Route>
+                            <Route exact path="/iframeTag/:ID" component={IframeTag}></Route>
                             {/* <Route exact path="*" component={ErrorPage}></Route> */}
                         </>
                     ) : (

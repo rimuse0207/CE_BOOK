@@ -15,7 +15,6 @@ const LoginMainPage = ({ setLoginCheck }) => {
     const [password, setPassword] = useState('');
 
     useEffect(() => {
-        console.log(HeaderTokenNames);
         if (HeaderTokenNames) {
             getLoginInfoData();
         } else {
@@ -31,8 +30,8 @@ const LoginMainPage = ({ setLoginCheck }) => {
             if (SendDataLoginInfoData.data.dataSuccess) {
                 await dispatch(LoginCheckRedux(SendDataLoginInfoData.data.loginData));
             } else {
+                alert('로그인 불가');
             }
-            console.log(SendDataLoginInfoData);
         } catch (error) {
             console.log(error);
         }
@@ -46,19 +45,18 @@ const LoginMainPage = ({ setLoginCheck }) => {
                 id: id,
                 password: password,
             });
-            console.log(loginCheck);
-            if (!loginCheck.data.LoginCheck) {
+
+            if (loginCheck.data.IpCheck) {
+                alert('해당 IP로 접속이 불가 합니다.');
+                return;
+            } else if (!loginCheck.data.LoginCheck) {
                 alert(loginCheck.data.message);
                 setPassword('');
             } else {
-                // sessionStorage.setItem('DHKS_TOKEN', loginCheck.data.token);
-                // localStorage.setItem('id', loginCheck.data.data.id);
-                // localStorage.setItem('loginOutCheck', 'conneting');
+                sessionStorage.setItem('DHKS_TOKEN', loginCheck.data.loginData.LoginToken);
+                localStorage.setItem('id', loginCheck.data.loginData.email);
+
                 await dispatch(LoginCheckRedux(loginCheck.data.loginData));
-                // await setLoginCheck(true);
-                // if (loginCheck.data.changePassword) {
-                //     history.push('/');
-                // }
             }
         } catch (error) {
             console.log(error);

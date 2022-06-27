@@ -161,29 +161,12 @@ const ContentList = ({ link_title, link_change_name, link_write_name, link_write
         }
     };
 
-    useEffect(() => {
-        console.log(document.getElementById('iframe1').onload);
-        console.log(document.getElementById('sizer'));
-    }, []);
-
     return (
         <ContentListMainDivBox>
             <div>
                 <div className="ContentList_Main_Container">
                     <div className="ContentList_Left_Image">
                         <div className="ContentList_Left_Image_Content">
-                            {/* <Document
-                                file={`${process.env.REACT_APP_API_URL}/CEBook/${link_change_name}`}
-                                onLoadSuccess={onDocumentLoadSuccess}
-                            >
-                                <Page
-                                    className="rqwrwqr"
-                                    height={document.getElementsByClassName('PdfDiv')[0]?.clientHeight * 0.8 ?? 150}
-                                    key={1}
-                                    pageNumber={1}
-                                    renderAnnotationLayer={false}
-                                />
-                            </Document> */}
                             <object
                                 data={`${process.env.REACT_APP_API_URL}/CEBook/${link_change_name}#toolbar=0&navpane=0`}
                                 type="application/pdf"
@@ -192,7 +175,6 @@ const ContentList = ({ link_title, link_change_name, link_write_name, link_write
                                 frameBorder="0"
                                 scrolling="no"
                                 cellSpacing="0"
-                                allow=""
                                 style={{ height: '100%', overflow: 'hidden' }}
                                 id="iframe1"
                             >
